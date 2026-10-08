@@ -1,5 +1,7 @@
 # GPS Tracker
 
+این پروژه یک ردیاب GPS متن‌باز است که از سه بخش تشکیل شده: فریمور ESP32-C3 برای ارتباط با GPS و ماژول SIM800، اپ اندروید برای نمایش موقعیت و مدیریت دستگاه، و سرور FastAPI برای دریافت و ذخیرهٔ اطلاعات. امکانات آن شامل موقعیت‌یابی زنده، تاریخچهٔ مسیر، کنترل رله، محدودهٔ جغرافیایی و به‌روزرسانی فریمور است. توضیحات نصب و عملکرد هر بخش در [راهنمای کامل فارسی](README.fa.md) آمده است.
+
 An open-source GPS tracking system with ESP32-C3 firmware, an Android application, and a self-hosted FastAPI server. GPS telemetry, SMS verification, relay control, circular geofences, offline location recovery, and firmware updates share a device-specific MQTT protocol.
 
 **[راهنمای کامل فارسی](README.fa.md)** · [Architecture](docs/ARCHITECTURE.md) · [MQTT protocol](docs/MQTT_PROTOCOL.md) · [API routes](docs/API_ROUTES.md) · [Source inventory](docs/SOURCE_INVENTORY.md) · [Known limitations](docs/KNOWN_LIMITATIONS.md)
