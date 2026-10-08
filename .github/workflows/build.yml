@@ -24,6 +24,8 @@ jobs:
           distribution: temurin
           java-version: '17'
       - uses: android-actions/setup-android@v3
+        with:
+          packages: platform-tools
       - run: sdkmanager 'platforms;android-34' 'build-tools;34.0.0' 'ndk;25.1.8937393'
       - run: sh gradlew :app:assembleDebug --console=plain
         working-directory: android
