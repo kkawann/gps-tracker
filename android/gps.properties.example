@@ -1,0 +1,8 @@
+# Copy to gps.properties. The copy is excluded from Git.
+# Emulator access to services running on the host computer:
+server.url=http://10.0.2.2:8081
+mqtt.broker=tcp://10.0.2.2:1883
+mqtt.username=
+mqtt.password=
+# For a physical phone, replace the host with your reachable server.
+# BuildConfig values can be recovered from APKs; use limited per-device credentials.

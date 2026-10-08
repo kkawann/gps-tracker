@@ -1,0 +1,6 @@
+user backend
+topic readwrite gps/#
+
+# A device and its app use a restricted account named after the DEVICE_ID.
+# Example: MQTT username device_1 can access gps/device_1/#.
+pattern readwrite gps/%u/#

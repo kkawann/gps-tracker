@@ -1,0 +1,359 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_glass_gradient"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:paddingStart="24dp"
+        android:paddingEnd="24dp"
+        android:paddingTop="32dp"
+        android:paddingBottom="36dp">
+
+        <!-- ═══ Logo lockup ═══════════════════════════════════ -->
+        <ImageView
+            android:id="@+id/tvLogoMark"
+            android:layout_width="88dp"
+            android:layout_height="88dp"
+            android:padding="19dp"
+            android:src="@drawable/ic_brand_mark"
+            android:contentDescription="نشان GPS Tracker"
+            android:background="@drawable/bg_glass_panel"
+            android:elevation="4dp"
+            android:layout_marginBottom="16dp" />
+
+        <TextView
+            android:id="@+id/tvLogoTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="راه‌نما"
+            android:textColor="@color/text_primary"
+            android:textSize="28sp"
+            android:fontFamily="@font/vazirmatn_bold"
+            android:letterSpacing="0.02"
+            android:layout_marginBottom="6dp" />
+
+        <TextView
+            android:id="@+id/tvLogoSubtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="همراه مطمئن خودروی شما"
+            android:textColor="@color/text_secondary"
+            android:textSize="14sp"
+            android:fontFamily="@font/vazirmatn_medium"
+            android:layout_marginBottom="22dp" />
+
+        <!-- ═══ Step Indicator (glowing) ══════════════════════ -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginBottom="20dp">
+
+            <TextView
+                android:id="@+id/stepDot1"
+                android:layout_width="34dp"
+                android:layout_height="34dp"
+                android:gravity="center"
+                android:text="۱"
+                android:textSize="13sp"
+                android:fontFamily="@font/vazirmatn_bold"
+                android:textColor="@color/aurora_cyan"
+                android:background="@drawable/bg_engine_badge" />
+
+            <View
+                android:id="@+id/stepLine1"
+                android:layout_width="36dp"
+                android:layout_height="2dp"
+                android:layout_marginStart="6dp"
+                android:layout_marginEnd="6dp"
+                android:background="@color/md_theme_outlineVariant" />
+
+            <TextView
+                android:id="@+id/stepDot2"
+                android:layout_width="34dp"
+                android:layout_height="34dp"
+                android:gravity="center"
+                android:text="۲"
+                android:textSize="13sp"
+                android:fontFamily="@font/vazirmatn_bold"
+                android:textColor="@color/text_hint"
+                android:background="@drawable/bg_engine_badge" />
+
+            <View
+                android:id="@+id/stepLine2"
+                android:layout_width="36dp"
+                android:layout_height="2dp"
+                android:layout_marginStart="6dp"
+                android:layout_marginEnd="6dp"
+                android:background="@color/md_theme_outlineVariant" />
+
+            <TextView
+                android:id="@+id/stepDot3"
+                android:layout_width="34dp"
+                android:layout_height="34dp"
+                android:gravity="center"
+                android:text="۳"
+                android:textSize="13sp"
+                android:fontFamily="@font/vazirmatn_bold"
+                android:textColor="@color/text_hint"
+                android:background="@drawable/bg_engine_badge" />
+        </LinearLayout>
+
+        <!-- ═══ Glass Card Container ══════════════════════════ -->
+        <LinearLayout
+            android:id="@+id/authCard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/bg_glass_panel"
+            android:padding="22dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="راه‌اندازی دستگاه"
+                android:textColor="@color/text_primary"
+                android:textSize="16sp"
+                android:fontFamily="@font/vazirmatn_bold"
+                android:layout_marginBottom="4dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="چند مرحله کوتاه تا اتصال امن خودروی شما"
+                android:textColor="@color/text_secondary"
+                android:textSize="11sp"
+                android:fontFamily="@font/vazirmatn_medium"
+                android:layout_marginBottom="18dp" />
+
+            <!-- ═══ Step 1: Request OTP ════════════════════════ -->
+            <LinearLayout
+                android:id="@+id/stepRequestOtp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="visible">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="شناسه دستگاه"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="13sp"
+                    android:fontFamily="@font/vazirmatn_medium"
+                    android:layout_marginBottom="8dp" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="14dp"
+                    style="@style/InputDark">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etDeviceUid"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="مثلاً: CAR1-XXXX"
+                        android:textColor="@color/text_primary"
+                        android:textColorHint="@color/text_hint"
+                        android:fontFamily="@font/vazirmatn_medium"
+                        android:inputType="text"
+                        android:textSize="15sp"
+                        android:padding="14dp" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="شماره تلفن"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="13sp"
+                    android:fontFamily="@font/vazirmatn_medium"
+                    android:layout_marginBottom="8dp" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    style="@style/InputDark">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etPhone"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="0912..."
+                        android:textColor="@color/text_primary"
+                        android:textColorHint="@color/text_hint"
+                        android:fontFamily="@font/vazirmatn_medium"
+                        android:inputType="phone"
+                        android:textSize="15sp"
+                        android:padding="14dp" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="کد از دستگاه GPS پیامک می‌شود"
+                    android:textColor="@color/text_hint"
+                    android:textSize="11sp"
+                    android:fontFamily="@font/vazirmatn_medium"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="8dp" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnRequestOtp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="دریافت کد"
+                    style="@style/BtnPrimary"
+                    android:layout_marginTop="10dp" />
+
+                <com.google.android.material.progressindicator.LinearProgressIndicator
+                    android:id="@+id/loadingRequest"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:indeterminate="true"
+                    android:visibility="gone"
+                    app:indicatorColor="@color/aurora_cyan"
+                    app:trackColor="@color/md_theme_surfaceVariant"
+                    app:trackCornerRadius="4dp" />
+            </LinearLayout>
+
+            <!-- ═══ Step 2: Verify OTP ═════════════════════════ -->
+            <LinearLayout
+                android:id="@+id/stepVerifyOtp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/tvOtpDeviceUid"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="دستگاه: ..."
+                    android:textColor="@color/aurora_cyan"
+                    android:textSize="14sp"
+                    android:fontFamily="@font/vazirmatn_semi_bold"
+                    android:layout_marginBottom="12dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="کد تایید"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="13sp"
+                    android:fontFamily="@font/vazirmatn_medium"
+                    android:layout_marginBottom="8dp" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    style="@style/InputDark">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etOtpCode"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="کد SMS"
+                        android:textColor="@color/text_primary"
+                        android:textColorHint="@color/text_hint"
+                        android:fontFamily="@font/vazirmatn_medium"
+                        android:inputType="number"
+                        android:maxLength="6"
+                        android:textSize="20sp"
+                        android:gravity="center"
+                        android:letterSpacing="0.35"
+                        android:padding="14dp" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnVerifyOtp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="تایید کد"
+                    style="@style/BtnPrimary"
+                    android:layout_marginTop="10dp" />
+
+                <com.google.android.material.progressindicator.LinearProgressIndicator
+                    android:id="@+id/loadingVerify"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:indeterminate="true"
+                    android:visibility="gone"
+                    app:indicatorColor="@color/aurora_cyan"
+                    app:trackColor="@color/md_theme_surfaceVariant"
+                    app:trackCornerRadius="4dp" />
+            </LinearLayout>
+
+            <!-- ═══ Step 3: Register Device ════════════════════ -->
+            <LinearLayout
+                android:id="@+id/stepRegister"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="نام دستگاه"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="13sp"
+                    android:fontFamily="@font/vazirmatn_medium"
+                    android:layout_marginBottom="8dp" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    style="@style/InputDark">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etDeviceName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="مثلاً: پژو ۲۰۶ سفید"
+                        android:textColor="@color/text_primary"
+                        android:textColorHint="@color/text_hint"
+                        android:fontFamily="@font/vazirmatn_medium"
+                        android:inputType="text"
+                        android:textSize="15sp"
+                        android:padding="14dp" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnRegister"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="ثبت و اتصال"
+                    style="@style/BtnPrimary"
+                    android:layout_marginTop="10dp" />
+
+                <com.google.android.material.progressindicator.LinearProgressIndicator
+                    android:id="@+id/loadingRegister"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:indeterminate="true"
+                    android:visibility="gone"
+                    app:indicatorColor="@color/aurora_green"
+                    app:trackColor="@color/md_theme_surfaceVariant"
+                    app:trackCornerRadius="4dp" />
+            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>

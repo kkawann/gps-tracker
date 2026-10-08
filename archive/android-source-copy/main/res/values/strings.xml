@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">GPS Tracker</string>
+    <string name="tab_dashboard">داشبورد</string>
+    <string name="tab_history">تاریخچه</string>
+    <string name="tab_geofence">جیوفنس</string>
+    <string name="tab_settings">تنظیمات</string>
+</resources>

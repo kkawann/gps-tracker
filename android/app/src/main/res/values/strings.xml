@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">راه‌نما</string>
+    <string name="tab_dashboard">داشبورد</string>
+    <string name="tab_history">تاریخچه</string>
+    <string name="tab_geofence">محدوده امن</string>
+    <string name="tab_settings">تنظیمات</string>
+</resources>

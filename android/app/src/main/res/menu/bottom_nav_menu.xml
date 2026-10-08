@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/dashboardFragment"
+          android:icon="@drawable/ic_dashboard"
+          android:title="@string/tab_dashboard" />
+    <item android:id="@+id/historyFragment"
+          android:icon="@drawable/ic_history"
+          android:title="@string/tab_history" />
+    <item android:id="@+id/geofenceFragment"
+          android:icon="@drawable/ic_geofence"
+          android:title="@string/tab_geofence" />
+    <item android:id="@+id/settingsFragment"
+          android:icon="@drawable/ic_settings"
+          android:title="@string/tab_settings" />
+</menu>

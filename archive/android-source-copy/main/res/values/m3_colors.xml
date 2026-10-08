@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Primary — Electric Blue -->
+    <color name="md_theme_primary">#3B82F6</color>
+    <color name="md_theme_onPrimary">#FFFFFF</color>
+    <color name="md_theme_primaryContainer">#172A4D</color>
+    <color name="md_theme_onPrimaryContainer">#D6E6FF</color>
+
+    <!-- Secondary — Aurora Green -->
+    <color name="md_theme_secondary">#34D399</color>
+    <color name="md_theme_onSecondary">#06281D</color>
+    <color name="md_theme_secondaryContainer">#0C3B2E</color>
+    <color name="md_theme_onSecondaryContainer">#7CF4C4</color>
+
+    <!-- Tertiary — Aurora Purple -->
+    <color name="md_theme_tertiary">#A78BFA</color>
+    <color name="md_theme_onTertiary">#241A4D</color>
+    <color name="md_theme_tertiaryContainer">#2E2459</color>
+    <color name="md_theme_onTertiaryContainer">#E4DCFF</color>
+
+    <!-- Error — Coral Red -->
+    <color name="md_theme_error">#FF6B81</color>
+    <color name="md_theme_onError">#4C0011</color>
+    <color name="md_theme_errorContainer">#4C0011</color>
+    <color name="md_theme_onErrorContainer">#FFD9DC</color>
+
+    <!-- Background & Surface -->
+    <color name="md_theme_background">#0A1120</color>
+    <color name="md_theme_onBackground">#E6EEFF</color>
+    <color name="md_theme_surface">#0F172A</color>
+    <color name="md_theme_onSurface">#E6EEFF</color>
+    <color name="md_theme_surfaceVariant">#141F35</color>
+    <color name="md_theme_onSurfaceVariant">#93A4C3</color>
+
+    <!-- Surface containers -->
+    <color name="md_theme_surfaceContainerLowest">#080D1A</color>
+    <color name="md_theme_surfaceContainerLow">#121B2E</color>
+    <color name="md_theme_surfaceContainer">#152036</color>
+    <color name="md_theme_surfaceContainerHigh">#1A2640</color>
+    <color name="md_theme_surfaceContainerHighest">#1F2D4A</color>
+
+    <!-- Outline -->
+    <color name="md_theme_outline">#2A3A5C</color>
+    <color name="md_theme_outlineVariant">#1E2A44</color>
+
+    <!-- Inverse -->
+    <color name="md_theme_inverseSurface">#E6EEFF</color>
+    <color name="md_theme_inverseOnSurface">#0A1120</color>
+
+    <!-- Scrim & Shadow -->
+    <color name="md_theme_scrim">#000000</color>
+
+    <!-- Status & Navigation bars -->
+    <color name="md_theme_statusBar">#050A14</color>
+    <color name="md_theme_navigationBar">#F20C1526</color>
+</resources>

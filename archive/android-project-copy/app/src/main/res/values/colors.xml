@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- ══════════════════════════════════════════════════════════
+         AURORA DESIGN SYSTEM — GPS Tracker v2
+         Deep-space base + neon accents + glass surfaces
+         ══════════════════════════════════════════════════════════ -->
+
+    <!-- ─── Base Surfaces ───────────────────────────────────── -->
+    <color name="bg_deep">#FF050A14</color>
+    <color name="bg_dark">#FF0A1120</color>
+    <color name="surface_dark">#FF0F172A</color>
+    <color name="card_dark">#FF111C30</color>
+    <color name="card_border">#FF1E2A44</color>
+
+    <!-- ─── Aurora Accents ──────────────────────────────────── -->
+    <color name="aurora_cyan">#FF22D3EE</color>
+    <color name="aurora_blue">#FF3B82F6</color>
+    <color name="aurora_indigo">#FF6366F1</color>
+    <color name="aurora_purple">#FFA78BFA</color>
+    <color name="aurora_green">#FF34D399</color>
+    <color name="aurora_amber">#FFFBBF24</color>
+    <color name="aurora_red">#FFFF4D67</color>
+    <color name="aurora_pink">#FFF472B6</color>
+
+    <!-- ─── Text ─────────────────────────────────────────────── -->
+    <color name="text_primary">#FFE6EEFF</color>
+    <color name="text_secondary">#FF93A4C3</color>
+    <color name="text_hint">#FF5C6B8A</color>
+
+    <!-- ─── Legacy aliases (code/layout compatibility) ──────── -->
+    <color name="accent_blue">@color/aurora_blue</color>
+    <color name="accent_green">@color/aurora_green</color>
+    <color name="accent_red">@color/aurora_red</color>
+    <color name="accent_yellow">@color/aurora_amber</color>
+    <color name="neon_cyan">@color/aurora_cyan</color>
+    <color name="neon_pink">@color/aurora_pink</color>
+    <color name="neon_purple">@color/aurora_purple</color>
+    <color name="neon_green">@color/aurora_green</color>
+    <color name="neon_red">@color/aurora_red</color>
+    <color name="neon_yellow">@color/aurora_amber</color>
+    <color name="accent_gradient_start">@color/aurora_blue</color>
+    <color name="accent_gradient_end">@color/aurora_cyan</color>
+
+    <!-- ─── Glass System ─────────────────────────────────────── -->
+    <color name="glass_bg">#1AFFFFFF</color>
+    <color name="glass_bg_elevated">#33FFFFFF</color>
+    <color name="glass_border">#26FFFFFF</color>
+    <color name="glass_shine">#14FFFFFF</color>
+    <color name="glass_panel_bg">#C20F1A30</color>
+    <color name="glass_panel_border">#26FFFFFF</color>
+    <color name="glass_panel_shine">#0FFFFFFF</color>
+    <color name="glass_button_bg">#66101830</color>
+
+    <!-- ─── System Bars & Misc ───────────────────────────────── -->
+    <color name="nav_bar">#F20C1526</color>
+    <color name="status_bar">#FF050A14</color>
+    <color name="divider">#FF1E2A44</color>
+    <color name="scrim">#99000000</color>
+</resources>

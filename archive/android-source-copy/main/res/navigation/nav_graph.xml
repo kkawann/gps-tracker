@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/authFragment">
+
+    <fragment
+        android:id="@+id/authFragment"
+        android:name="com.gpsv1_final.ui.auth.AuthFragment"
+        android:label="Auth"
+        tools:layout="@layout/fragment_auth">
+        <action android:id="@+id/action_auth_to_dashboard"
+            app:destination="@id/dashboardFragment"
+            app:popUpTo="@id/authFragment"
+            app:popUpToInclusive="true"
+            app:enterAnim="@anim/slide_in_up"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_out_down" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/dashboardFragment"
+        android:name="com.gpsv1_final.ui.dashboard.DashboardFragment"
+        android:label="@string/tab_dashboard"
+        tools:layout="@layout/fragment_dashboard" />
+
+    <fragment
+        android:id="@+id/historyFragment"
+        android:name="com.gpsv1_final.ui.history.HistoryFragment"
+        android:label="@string/tab_history"
+        tools:layout="@layout/fragment_history" />
+
+    <fragment
+        android:id="@+id/geofenceFragment"
+        android:name="com.gpsv1_final.ui.geofence.GeofenceFragment"
+        android:label="@string/tab_geofence"
+        tools:layout="@layout/fragment_geofence" />
+
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.gpsv1_final.ui.settings.SettingsFragment"
+        android:label="@string/tab_settings"
+        tools:layout="@layout/fragment_settings">
+        <action android:id="@+id/action_settings_to_auth"
+            app:destination="@id/authFragment"
+            app:popUpTo="@id/dashboardFragment"
+            app:popUpToInclusive="true"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out" />
+    </fragment>
+</navigation>

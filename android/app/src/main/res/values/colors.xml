@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- ══════════════════════════════════════════════════════════
+         AURORA DESIGN SYSTEM v3 — GPS Tracker
+         Inspired by MUI / Material Design 3 + Aurora Dark
+         Deep-space base + neon accents + glass surfaces
+         ══════════════════════════════════════════════════════════ -->
+
+    <!-- ─── Base Surfaces (M3 Surface Tones) ────────────────── -->
+    <color name="bg_deep">#FF08111B</color>
+    <color name="bg_dark">#FF0D1925</color>
+    <color name="surface_dark">#FF122130</color>
+    <color name="card_dark">#FF162838</color>
+    <color name="card_border">#FF293B4A</color>
+
+    <!-- ─── Aurora Accents ──────────────────────────────────── -->
+    <color name="aurora_cyan">#FF61D7C4</color>
+    <color name="aurora_blue">#FF5C91E8</color>
+    <color name="aurora_indigo">#FF777FC5</color>
+    <color name="aurora_purple">#FFAAA0E5</color>
+    <color name="aurora_green">#FF62C9A5</color>
+    <color name="aurora_amber">#FFE8B66D</color>
+    <color name="aurora_red">#FFEB7884</color>
+    <color name="aurora_pink">#FFD78EB9</color>
+
+    <!-- ─── Text (M3 Typography Tokens) ─────────────────────── -->
+    <color name="text_primary">#FFE8EEF0</color>
+    <color name="text_secondary">#FFA5B4BC</color>
+    <color name="text_hint">#FF738590</color>
+
+    <!-- ─── Legacy aliases (code/layout compatibility) ──────── -->
+    <color name="accent_blue">@color/aurora_blue</color>
+    <color name="accent_green">@color/aurora_green</color>
+    <color name="accent_red">@color/aurora_red</color>
+    <color name="accent_yellow">@color/aurora_amber</color>
+    <color name="neon_cyan">@color/aurora_cyan</color>
+    <color name="neon_pink">@color/aurora_pink</color>
+    <color name="neon_purple">@color/aurora_purple</color>
+    <color name="neon_green">@color/aurora_green</color>
+    <color name="neon_red">@color/aurora_red</color>
+    <color name="neon_yellow">@color/aurora_amber</color>
+    <color name="accent_gradient_start">@color/aurora_blue</color>
+    <color name="accent_gradient_end">@color/aurora_cyan</color>
+
+    <!-- ─── Glass System v3 (M3 Surface Containers) ─────────── -->
+    <color name="glass_bg">#1AFFFFFF</color>
+    <color name="glass_bg_elevated">#33FFFFFF</color>
+    <color name="glass_border">#26FFFFFF</color>
+    <color name="glass_shine">#14FFFFFF</color>
+    <color name="glass_panel_bg">#F212202D</color>
+    <color name="glass_panel_border">#263D4A55</color>
+    <color name="glass_panel_shine">#0FFFFFFF</color>
+    <color name="glass_button_bg">#E6192A38</color>
+
+    <!-- ─── M3 Elevation Tokens (surface overlay levels) ────── -->
+    <color name="surface_overlay_1">#0DFFFFFF</color>
+    <color name="surface_overlay_2">#14FFFFFF</color>
+    <color name="surface_overlay_3">#1CFFFFFF</color>
+    <color name="surface_overlay_4">#24FFFFFF</color>
+    <color name="surface_overlay_5">#33FFFFFF</color>
+
+    <!-- ─── M3 State Layer Colors (pressed/hovered/focused) ─── -->
+    <color name="state_primary_pressed">#14FFFFFF</color>
+    <color name="state_primary_hovered">#0AFFFFFF</color>
+    <color name="state_primary_focused">#1FFFFFFF</color>
+    <color name="state_error_pressed">#1AFF4D67</color>
+
+    <!-- ─── System Bars & Misc ───────────────────────────────── -->
+    <color name="nav_bar">#F20D1925</color>
+    <color name="status_bar">#FF08111B</color>
+    <color name="divider">#FF293B4A</color>
+    <color name="scrim">#99000000</color>
+
+    <!-- ─── Neon Glow (for special elements) ─────────────────── -->
+    <color name="glow_cyan">#3322D3EE</color>
+    <color name="glow_green">#3334D399</color>
+    <color name="glow_red">#33FF4D67</color>
+    <color name="glow_amber">#33FBBF24</color>
+</resources>

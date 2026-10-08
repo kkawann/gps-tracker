@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/bg_deep"
+    android:paddingStart="14dp"
+    android:paddingEnd="14dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingTop="12dp"
+        android:paddingBottom="8dp">
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="گزارش سفرها"
+                android:textColor="@color/text_primary"
+                android:textSize="20sp"
+                android:fontFamily="@font/vazirmatn_bold" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="مسیر و عملکرد خودرو را مرور کنید"
+                android:textColor="@color/text_secondary"
+                android:textSize="11sp"
+                android:fontFamily="@font/vazirmatn_medium" />
+        </LinearLayout>
+        <TextView
+            android:id="@+id/tvSelectedDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_signal_pill"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:paddingTop="6dp"
+            android:paddingBottom="6dp"
+            android:text="امروز"
+            android:textColor="@color/aurora_cyan"
+            android:textSize="11sp"
+            android:fontFamily="@font/vazirmatn_semi_bold" />
+    </LinearLayout>
+
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none"
+        android:clipToPadding="false"
+        android:paddingTop="4dp"
+        android:paddingBottom="8dp">
+        <LinearLayout
+            android:id="@+id/daySelectorContainer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" />
+    </HorizontalScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:background="@drawable/bg_surface_card"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="از"
+            android:textColor="@color/text_hint"
+            android:textSize="11sp"
+            android:fontFamily="@font/vazirmatn_medium"
+            android:layout_marginEnd="4dp" />
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnTimeFrom"
+            style="@style/BtnOutlined"
+            android:layout_width="wrap_content"
+            android:layout_height="34dp"
+            android:text="00:00"
+            android:textColor="@color/aurora_cyan"
+            android:textSize="11sp"
+            android:minWidth="0dp"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:paddingStart="9dp"
+            android:paddingEnd="9dp"
+            app:cornerRadius="10dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="تا"
+            android:textColor="@color/text_hint"
+            android:textSize="11sp"
+            android:fontFamily="@font/vazirmatn_medium"
+            android:layout_marginStart="6dp"
+            android:layout_marginEnd="4dp" />
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnTimeTo"
+            style="@style/BtnOutlined"
+            android:layout_width="wrap_content"
+            android:layout_height="34dp"
+            android:text="23:59"
+            android:textColor="@color/aurora_cyan"
+            android:textSize="11sp"
+            android:minWidth="0dp"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:paddingStart="9dp"
+            android:paddingEnd="9dp"
+            app:cornerRadius="10dp" />
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnApplyTimeFilter"
+            android:layout_width="wrap_content"
+            android:layout_height="34dp"
+            android:text="اعمال"
+            android:textColor="#FFFFFF"
+            android:textSize="11sp"
+            android:fontFamily="@font/vazirmatn_semi_bold"
+            android:minWidth="0dp"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            app:backgroundTint="@color/aurora_blue"
+            app:cornerRadius="10dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:baselineAligned="false"
+        android:paddingTop="8dp"
+        android:paddingBottom="3dp">
+        <LinearLayout android:layout_width="0dp" android:layout_height="58dp" android:layout_weight="1" android:layout_marginEnd="4dp" android:orientation="vertical" android:gravity="center" android:background="@drawable/bg_stat_card_v2">
+            <TextView android:id="@+id/tvDistance" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="--" android:textColor="@color/aurora_cyan" android:textSize="15sp" android:fontFamily="@font/vazirmatn_bold" />
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="مسافت" android:textColor="@color/text_hint" android:textSize="9sp" android:fontFamily="@font/vazirmatn_medium" />
+        </LinearLayout>
+        <LinearLayout android:layout_width="0dp" android:layout_height="58dp" android:layout_weight="1" android:layout_marginEnd="4dp" android:orientation="vertical" android:gravity="center" android:background="@drawable/bg_stat_card_v2">
+            <TextView android:id="@+id/tvDuration" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="--" android:textColor="@color/aurora_green" android:textSize="15sp" android:fontFamily="@font/vazirmatn_bold" />
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="مدت" android:textColor="@color/text_hint" android:textSize="9sp" android:fontFamily="@font/vazirmatn_medium" />
+        </LinearLayout>
+        <LinearLayout android:layout_width="0dp" android:layout_height="58dp" android:layout_weight="1" android:layout_marginEnd="4dp" android:orientation="vertical" android:gravity="center" android:background="@drawable/bg_stat_card_v2">
+            <TextView android:id="@+id/tvMaxSpeed" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="--" android:textColor="@color/aurora_amber" android:textSize="15sp" android:fontFamily="@font/vazirmatn_bold" />
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="حداکثر" android:textColor="@color/text_hint" android:textSize="9sp" android:fontFamily="@font/vazirmatn_medium" />
+        </LinearLayout>
+        <LinearLayout android:layout_width="0dp" android:layout_height="58dp" android:layout_weight="1" android:orientation="vertical" android:gravity="center" android:background="@drawable/bg_stat_card_v2">
+            <TextView android:id="@+id/tvAvgSpeed" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="--" android:textColor="@color/aurora_purple" android:textSize="15sp" android:fontFamily="@font/vazirmatn_bold" />
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="میانگین" android:textColor="@color/text_hint" android:textSize="9sp" android:fontFamily="@font/vazirmatn_medium" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/stopInfoCard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:background="@drawable/bg_trip_replay_card"
+        android:paddingHorizontal="14dp"
+        android:paddingVertical="8dp"
+        android:layout_marginTop="4dp"
+        android:visibility="gone">
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="⏸" android:textSize="16sp" android:layout_marginEnd="8dp" />
+        <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical">
+            <TextView android:id="@+id/tvStopTitle" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="اینجا وایستادی" android:textColor="@color/aurora_amber" android:textSize="12sp" android:fontFamily="@font/vazirmatn_semi_bold" />
+            <TextView android:id="@+id/tvStopDuration" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textColor="@color/text_secondary" android:textSize="11sp" android:fontFamily="@font/vazirmatn_medium" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <com.google.android.material.progressindicator.LinearProgressIndicator
+        android:id="@+id/progressBarHistory"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:indeterminate="true"
+        android:visibility="gone"
+        app:indicatorColor="@color/aurora_cyan"
+        app:trackColor="@color/md_theme_surfaceVariant"
+        app:trackCornerRadius="4dp" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginTop="7dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/bg_surface_card"
+        android:clipToOutline="true">
+        <org.osmdroid.views.MapView
+            android:id="@+id/mapHistory"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+        <LinearLayout
+            android:id="@+id/tvHistoryEmpty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:padding="18dp"
+            android:background="@drawable/bg_surface_card"
+            android:visibility="gone">
+            <TextView
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:gravity="center"
+                android:text="⌖"
+                android:textColor="@color/aurora_cyan"
+                android:textSize="28sp"
+                android:background="@drawable/bg_stat_card_v2" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="برای این روز سفری ثبت نشده"
+                android:textColor="@color/text_primary"
+                android:textSize="13sp"
+                android:fontFamily="@font/vazirmatn_semi_bold" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:text="روز دیگری را از نوار بالا انتخاب کنید"
+                android:textColor="@color/text_secondary"
+                android:textSize="11sp"
+                android:fontFamily="@font/vazirmatn_medium" />
+        </LinearLayout>
+    </FrameLayout>
+</LinearLayout>

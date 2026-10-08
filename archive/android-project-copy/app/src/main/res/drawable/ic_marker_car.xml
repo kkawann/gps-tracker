@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="40dp"
+    android:height="52dp"
+    android:viewportWidth="40"
+    android:viewportHeight="52">
+
+    <!-- Outer glow (soft shadow) -->
+    <path
+        android:fillColor="#3322D3EE"
+        android:pathData="M20,48 C10,42 2,34 2,22 C2,10 10,2 20,2 C30,2 38,10 38,22 C38,34 30,42 20,48Z" />
+
+    <!-- Pin body — Cyan neon -->
+    <path
+        android:fillColor="#22D3EE"
+        android:pathData="M20,46 C11,40 4,32 4,22 C4,12 12,4 20,4 C28,4 36,12 36,22 C36,32 29,40 20,46Z" />
+
+    <!-- Inner dot (white center) -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M20,16 m-5,0 a5,5 0 1,1 10,0 a5,5 0 1,1 -10,0" />
+
+    <!-- Tip shadow -->
+    <path
+        android:fillColor="#1A22D3EE"
+        android:pathData="M20,46 L15,38 L25,38 Z" />
+</vector>

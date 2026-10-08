@@ -1,0 +1,387 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_deep">
+
+    <!-- ═══ Map ═══════════════════════════════════════════════ -->
+    <org.osmdroid.views.MapView
+        android:id="@+id/map"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <!-- Pulse radar sits on the car position (moved in code) -->
+    <com.gpsv1_final.ui.widgets.PulseRadar
+        android:id="@+id/pulseRadar"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:visibility="gone" />
+
+    <!-- Top scrim for status pills legibility -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="110dp"
+        android:background="@drawable/bg_scrim_top"
+        android:fitsSystemWindows="false" />
+
+    <!-- ═══ Top Row: MQTT + Signal + Engine ═══════════════════ -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top"
+        android:orientation="horizontal"
+        android:paddingStart="14dp"
+        android:paddingEnd="14dp"
+        android:paddingTop="14dp"
+        android:gravity="center_vertical">
+
+        <!-- MQTT Status Glass Pill -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:background="@drawable/bg_signal_pill"
+            android:paddingStart="12dp"
+            android:paddingEnd="14dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp">
+
+            <com.gpsv1_final.ui.widgets.GlowDot
+                android:id="@+id/viewStatusDot"
+                android:layout_width="12dp"
+                android:layout_height="12dp" />
+
+            <TextView
+                android:id="@+id/tvConnectionStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="قطع"
+                android:textColor="@color/text_secondary"
+                android:textSize="11sp"
+                android:fontFamily="@font/vazirmatn_semi_bold"
+                android:layout_marginStart="7dp" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <!-- GPS Signal Pill -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:background="@drawable/bg_signal_pill"
+            android:paddingStart="14dp"
+            android:paddingEnd="14dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:layout_marginEnd="8dp">
+
+            <TextView
+                android:id="@+id/tvSignalBars"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="☆☆☆☆"
+                android:textColor="@color/aurora_green"
+                android:textSize="12sp"
+                android:fontFamily="@font/vazirmatn_medium" />
+
+            <TextView
+                android:id="@+id/tvSatellites"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" 0 ماهواره"
+                android:textColor="@color/text_secondary"
+                android:textSize="11sp"
+                android:fontFamily="@font/vazirmatn_medium" />
+        </LinearLayout>
+
+        <!-- Engine Status Badge -->
+        <LinearLayout
+            android:id="@+id/engineStatusBadge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:background="@drawable/bg_engine_badge"
+            android:paddingStart="12dp"
+            android:paddingEnd="14dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp">
+
+            <com.gpsv1_final.ui.widgets.GlowDot
+                android:id="@+id/viewEngineDot"
+                android:layout_width="12dp"
+                android:layout_height="12dp" />
+
+            <TextView
+                android:id="@+id/tvEngineStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="خاموش"
+                android:textColor="@color/text_secondary"
+                android:textSize="11sp"
+                android:fontFamily="@font/vazirmatn_semi_bold"
+                android:layout_marginStart="7dp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- ═══ Left Side: Power Toggle + Recenter ═════════════════ -->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start|center_vertical"
+        android:layout_marginStart="16dp"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <!-- Single Toggle Button — neon circle -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnStartEngine"
+            android:layout_width="68dp"
+            android:layout_height="68dp"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:text="⏻"
+            android:textColor="@color/aurora_red"
+            android:textSize="26sp"
+            android:fontFamily="@font/vazirmatn_bold"
+            app:backgroundTint="@color/glass_button_bg"
+            app:cornerRadius="34dp"
+            app:strokeColor="@color/aurora_red"
+            app:strokeWidth="2dp"
+            app:rippleColor="#40FF4D67" />
+
+        <TextView
+            android:id="@+id/tvRelayLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="خاموش"
+            android:textColor="@color/text_secondary"
+            android:textSize="10sp"
+            android:fontFamily="@font/vazirmatn_medium"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/bg_signal_pill"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:paddingTop="3dp"
+            android:paddingBottom="3dp" />
+
+        <!-- Recenter button -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnRecenter"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:layout_marginTop="14dp"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            app:icon="@drawable/ic_recenter"
+            app:iconGravity="textStart"
+            app:iconTint="@color/text_secondary"
+            app:backgroundTint="@color/glass_button_bg"
+            app:cornerRadius="22dp"
+            app:strokeColor="@color/glass_panel_border"
+            app:strokeWidth="1dp" />
+    </LinearLayout>
+
+    <!-- ═══ OTP Kill Dialog — glass modal ══════════════════════ -->
+    <LinearLayout
+        android:id="@+id/killOtpPanel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginStart="28dp"
+        android:layout_marginEnd="28dp"
+        android:orientation="vertical"
+        android:background="@drawable/bg_glass_panel"
+        android:padding="22dp"
+        android:elevation="12dp"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="تایید خاموش کردن موتور"
+            android:textColor="@color/aurora_red"
+            android:textSize="16sp"
+            android:fontFamily="@font/vazirmatn_bold"
+            android:layout_marginBottom="10dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="کد تایید پیامک‌شده را وارد کنید"
+            android:textColor="@color/text_secondary"
+            android:textSize="13sp"
+            android:fontFamily="@font/vazirmatn_medium"
+            android:layout_marginBottom="14dp" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            style="@style/InputDark">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etKillOtp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="کد تایید"
+                android:textColor="@color/text_primary"
+                android:textColorHint="@color/text_hint"
+                android:fontFamily="@font/vazirmatn_medium"
+                android:inputType="number"
+                android:textSize="18sp"
+                android:gravity="center"
+                android:letterSpacing="0.3" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnConfirmKill"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginEnd="8dp"
+                android:text="خاموش کن"
+                android:textColor="#FFFFFF"
+                android:textSize="13sp"
+                android:fontFamily="@font/vazirmatn_semi_bold"
+                app:backgroundTint="@color/aurora_red"
+                app:cornerRadius="16dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnCancelKill"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="لغو"
+                android:textColor="@color/text_secondary"
+                android:textSize="13sp"
+                android:fontFamily="@font/vazirmatn_medium"
+                style="@style/BtnOutlined"
+                app:cornerRadius="16dp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- Bottom scrim -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_gravity="bottom"
+        android:background="@drawable/bg_scrim_bottom" />
+
+    <!-- ═══ Bottom Panel: Gauge + Sparkline ════════════════════ -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:orientation="vertical"
+        android:paddingStart="14dp"
+        android:paddingEnd="14dp"
+        android:paddingBottom="18dp">
+
+        <!-- Warning Banner -->
+        <TextView
+            android:id="@+id/tvWarning"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_warning_banner"
+            android:paddingStart="14dp"
+            android:paddingEnd="14dp"
+            android:paddingTop="9dp"
+            android:paddingBottom="9dp"
+            android:text="سیگنال GPS قطع شده"
+            android:textColor="#FFFFFF"
+            android:textSize="12sp"
+            android:fontFamily="@font/vazirmatn_semi_bold"
+            android:gravity="center"
+            android:layout_marginBottom="10dp"
+            android:visibility="gone" />
+
+        <!-- Glass instrument panel -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:background="@drawable/bg_speed_panel"
+            android:paddingStart="20dp"
+            android:paddingEnd="16dp"
+            android:paddingTop="14dp"
+            android:paddingBottom="14dp">
+
+            <!-- Speed readout -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="bottom">
+
+                    <TextView
+                        android:id="@+id/tvSpeed"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0"
+                        android:textColor="@color/aurora_cyan"
+                        android:textSize="52sp"
+                        android:fontFamily="@font/vazirmatn_bold"
+                        android:textStyle="bold"
+                        android:includeFontPadding="false" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="km/h"
+                        android:textColor="@color/text_hint"
+                        android:textSize="13sp"
+                        android:fontFamily="@font/vazirmatn_medium"
+                        android:layout_marginStart="6dp"
+                        android:layout_marginBottom="10dp" />
+                </LinearLayout>
+
+                <!-- Live speed sparkline -->
+                <com.gpsv1_final.ui.widgets.SparklineView
+                    android:id="@+id/sparkline"
+                    android:layout_width="match_parent"
+                    android:layout_height="44dp"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginEnd="8dp" />
+
+                <!-- Last update -->
+                <TextView
+                    android:id="@+id/tvLastUpdate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="--:--"
+                    android:textColor="@color/text_hint"
+                    android:textSize="11sp"
+                    android:fontFamily="@font/vazirmatn_medium"
+                    android:layout_marginTop="6dp" />
+            </LinearLayout>
+
+            <!-- Neon gauge -->
+            <com.gpsv1_final.ui.widgets.SpeedGauge
+                android:id="@+id/speedGauge"
+                android:layout_width="128dp"
+                android:layout_height="128dp" />
+        </LinearLayout>
+    </LinearLayout>
+
+</FrameLayout>

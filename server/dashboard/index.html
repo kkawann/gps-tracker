@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GPS Tracker - پنل مدیریت</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --success: #16a34a;
+            --danger: #dc2626;
+            --warning: #f59e0b;
+            --bg: #0f172a;
+            --card: #1e293b;
+            --text: #f1f5f9;
+            --text-dim: #94a3b8;
+            --border: #334155;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+        }
+        /* ─── Login ──────────────────────────── */
+        .login-overlay {
+            position: fixed; inset: 0; background: var(--bg);
+            display: flex; align-items: center; justify-content: center; z-index: 9999;
+        }
+        .login-box {
+            background: var(--card); border: 1px solid var(--border);
+            border-radius: 16px; padding: 2.5rem; width: 380px;
+        }
+        .login-box h2 { text-align: center; margin-bottom: 1.5rem; color: var(--primary); }
+        .form-group { margin-bottom: 1rem; }
+        .form-group label { display: block; margin-bottom: 0.3rem; font-size: 0.85rem; color: var(--text-dim); }
+        .form-group input, .form-group select {
+            width: 100%; padding: 0.75rem; background: var(--bg);
+            border: 1px solid var(--border); border-radius: 8px;
+            color: var(--text); font-size: 0.95rem;
+        }
+        .form-group input:focus { outline: none; border-color: var(--primary); }
+        .btn {
+            padding: 0.75rem 1.5rem; background: var(--primary); color: white;
+            border: none; border-radius: 8px; font-size: 0.95rem; cursor: pointer;
+        }
+        .btn:hover { background: var(--primary-dark); }
+        .btn-sm { padding: 0.4rem 0.8rem; font-size: 0.8rem; }
+        .btn-danger { background: var(--danger); }
+        .btn-success { background: var(--success); }
+        .btn-outline { background: transparent; border: 1px solid var(--border); color: var(--text-dim); }
+        .error-msg { color: var(--danger); font-size: 0.85rem; text-align: center; margin-top: 0.5rem; display: none; }
+
+        /* ─── Header ─────────────────────────── */
+        .header {
+            background: var(--card); border-bottom: 1px solid var(--border);
+            padding: 0.8rem 2rem; display: flex; justify-content: space-between; align-items: center;
+        }
+        .header h1 { font-size: 1.2rem; color: var(--primary); }
+        .header-right { display: flex; align-items: center; gap: 1rem; }
+        .tabs { display: flex; gap: 0.5rem; }
+        .tab-btn {
+            padding: 0.5rem 1.2rem; background: var(--bg); border: 1px solid var(--border);
+            border-radius: 8px; color: var(--text-dim); cursor: pointer; font-size: 0.85rem;
+        }
+        .tab-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+        .status-dot {
+            width: 10px; height: 10px; border-radius: 50%;
+            background: var(--success); display: inline-block;
+        }
+
+        /* ─── Map View ────────────────────────── */
+        .view { display: none; height: calc(100vh - 52px); }
+        .view.active { display: flex; }
+        .map-view { display: grid; grid-template-columns: 300px 1fr; }
+        .sidebar { background: var(--card); border-left: 1px solid var(--border); padding: 1rem; overflow-y: auto; }
+        .sidebar h2 { font-size: 0.85rem; color: var(--text-dim); margin-bottom: 0.75rem; text-transform: uppercase; letter-spacing: 1px; }
+        .device-card {
+            background: var(--bg); border: 1px solid var(--border); border-radius: 8px;
+            padding: 0.75rem; margin-bottom: 0.5rem; cursor: pointer; transition: all 0.2s;
+        }
+        .device-card:hover { border-color: var(--primary); }
+        .device-card.active { border-color: var(--primary); box-shadow: 0 0 0 1px var(--primary); }
+        .device-name { font-weight: 600; font-size: 0.9rem; }
+        .device-meta { font-size: 0.75rem; color: var(--text-dim); display: flex; justify-content: space-between; margin-top: 0.25rem; }
+        .online-badge { background: var(--success); color: white; font-size: 0.65rem; padding: 2px 6px; border-radius: 4px; }
+        .offline-badge { background: var(--danger); color: white; font-size: 0.65rem; padding: 2px 6px; border-radius: 4px; }
+        #map { width: 100%; height: 100%; }
+        .stats-panel {
+            position: absolute; bottom: 20px; left: 320px;
+            background: var(--card); border: 1px solid var(--border);
+            border-radius: 12px; padding: 1rem; z-index: 1000; min-width: 250px;
+        }
+        .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+        .stat-item { text-align: center; }
+        .stat-value { font-size: 1.3rem; font-weight: 700; color: var(--primary); }
+        .stat-label { font-size: 0.7rem; color: var(--text-dim); }
+
+        /* ─── Admin View ──────────────────────── */
+        .admin-view { flex-direction: column; padding: 2rem; overflow-y: auto; }
+        .admin-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-bottom: 2rem; }
+        .admin-card {
+            background: var(--card); border: 1px solid var(--border);
+            border-radius: 12px; padding: 1.5rem;
+        }
+        .admin-card h3 { font-size: 1rem; margin-bottom: 1rem; color: var(--primary); }
+        .admin-stat { text-align: center; padding: 1rem; }
+        .admin-stat .value { font-size: 2rem; font-weight: 700; color: var(--primary); }
+        .admin-stat .label { font-size: 0.8rem; color: var(--text-dim); margin-top: 0.25rem; }
+
+        table { width: 100%; border-collapse: collapse; }
+        th { text-align: right; padding: 0.6rem; font-size: 0.75rem; color: var(--text-dim); border-bottom: 1px solid var(--border); text-transform: uppercase; }
+        td { padding: 0.6rem; font-size: 0.85rem; border-bottom: 1px solid var(--border); }
+        tr:hover { background: rgba(37, 99, 235, 0.05); }
+
+        .modal-overlay {
+            position: fixed; inset: 0; background: rgba(0,0,0,0.7);
+            display: none; align-items: center; justify-content: center; z-index: 9998;
+        }
+        .modal-overlay.active { display: flex; }
+        .modal {
+            background: var(--card); border: 1px solid var(--border);
+            border-radius: 16px; padding: 2rem; width: 400px; max-width: 90vw;
+        }
+        .modal h3 { margin-bottom: 1.5rem; color: var(--primary); }
+        .modal-actions { display: flex; gap: 0.75rem; margin-top: 1.5rem; }
+        .toast {
+            position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
+            background: var(--success); color: white; padding: 0.75rem 1.5rem;
+            border-radius: 8px; z-index: 9999; display: none;
+        }
+        .toast.error { background: var(--danger); }
+    </style>
+</head>
+<body>
+
+<!-- ─── Login ──────────────────────────── -->
+<div class="login-overlay" id="loginOverlay">
+    <div class="login-box">
+        <h2>GPS Tracker</h2>
+        <div class="form-group">
+            <label>نام کاربری</label>
+            <input type="text" id="loginUsername" placeholder="username" value="diman">
+        </div>
+        <div class="form-group">
+            <label>رمز عبور</label>
+            <input type="password" id="loginPassword" placeholder="password" value="your-password">
+        </div>
+        <button class="btn" onclick="login()" style="width:100%">ورود</button>
+        <div class="error-msg" id="loginError"></div>
+    </div>
+</div>
+
+<!-- ─── Header ─────────────────────────── -->
+<div class="header">
+    <h1>GPS Tracker</h1>
+    <div class="header-right">
+        <div class="tabs">
+            <button class="tab-btn active" onclick="showView('map')">نقشه</button>
+            <button class="tab-btn" onclick="showView('admin')">مدیریت</button>
+        </div>
+        <div style="display:flex; align-items:center; gap:0.5rem;">
+            <div class="status-dot"></div>
+            <span id="currentUser" style="font-size:0.85rem;"></span>
+        </div>
+        <button class="btn btn-sm btn-outline" onclick="logout()">خروج</button>
+    </div>
+</div>
+
+<!-- ─── Map View ───────────────────────── -->
+<div class="view map-view active" id="mapView">
+    <div class="sidebar">
+        <h2>دستگاه‌ها</h2>
+        <div id="deviceList"></div>
+    </div>
+    <div style="position:relative; width:100%; height:100%;">
+        <div id="map"></div>
+        <div class="stats-panel" id="statsPanel" style="display:none;">
+            <div class="stats-grid">
+                <div class="stat-item"><div class="stat-value" id="statSpeed">0</div><div class="stat-label">سرعت km/h</div></div>
+                <div class="stat-item"><div class="stat-value" id="statBattery">0%</div><div class="stat-label">باتری</div></div>
+                <div class="stat-item"><div class="stat-value" id="statDistance">0</div><div class="stat-label">مسافت km</div></div>
+                <div class="stat-item"><div class="stat-value" id="statAccuracy">0</div><div class="stat-label">دقت m</div></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ─── Admin View ─────────────────────── -->
+<div class="view admin-view" id="adminView">
+    <!-- Stats Cards -->
+    <div class="admin-cards" id="adminStats">
+        <div class="admin-card admin-stat"><div class="value" id="aStatUsers">0</div><div class="label">کاربران</div></div>
+        <div class="admin-card admin-stat"><div class="value" id="aStatDevices">0</div><div class="label">دستگاه‌ها</div></div>
+        <div class="admin-card admin-stat"><div class="value" id="aStatOnline">0</div><div class="label">آنلاین</div></div>
+        <div class="admin-card admin-stat"><div class="value" id="aStatLocations">0</div><div class="label">موقعیت‌ها</div></div>
+    </div>
+
+    <!-- Users Management -->
+    <div class="admin-card" style="margin-bottom:1.5rem;">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
+            <h3>مدیریت کاربران</h3>
+            <button class="btn btn-sm" onclick="showAddUserModal()">+ کاربر جدید</button>
+        </div>
+        <table>
+            <thead><tr><th>نام کاربری</th><th>ایمیل</th><th>نام</th><th>نقش</th><th>وضعیت</th><th>عملیات</th></tr></thead>
+            <tbody id="usersTable"></tbody>
+        </table>
+    </div>
+
+    <!-- Devices Management -->
+    <div class="admin-card">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
+            <h3>مدیریت دستگاه‌ها</h3>
+        </div>
+        <table>
+            <thead><tr><th>نام</th><th>Device UID</th><th>Topic</th><th>وضعیت</th><th>باتری</th><th>آخرین دیده شدن</th><th>عملیات</th></tr></thead>
+            <tbody id="devicesTable"></tbody>
+        </table>
+    </div>
+</div>
+
+<!-- ─── Add User Modal ─────────────────── -->
+<div class="modal-overlay" id="addUserModal">
+    <div class="modal">
+        <h3>افزودن کاربر جدید</h3>
+        <div class="form-group"><label>نام کاربری</label><input id="newUsername" placeholder="username"></div>
+        <div class="form-group"><label>ایمیل</label><input id="newEmail" type="email" placeholder="email@test.com"></div>
+        <div class="form-group"><label>رمز عبور</label><input id="newPassword" type="password" placeholder="password"></div>
+        <div class="form-group"><label>نام کامل</label><input id="newFullName" placeholder="نام و نام خانوادگی"></div>
+        <div class="form-group"><label>شماره تماس</label><input id="newPhone" placeholder="0912..."></div>
+        <div class="modal-actions">
+            <button class="btn" onclick="addUser()">ذخیره</button>
+            <button class="btn btn-outline" onclick="closeModal('addUserModal')">لغو</button>
+        </div>
+    </div>
+</div>
+
+<!-- ─── Toast ──────────────────────────── -->
+<div class="toast" id="toast"></div>
+
+<script>
+const API_BASE = window.location.origin + '/api';
+let token = localStorage.getItem('gps_token');
+let selectedDeviceId = null;
+let map, marker;
+
+// ─── Toast ──────────────────────────────
+function showToast(msg, isError = false) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.className = 'toast' + (isError ? ' error' : '');
+    t.style.display = 'block';
+    setTimeout(() => t.style.display = 'none', 3000);
+}
+
+// ─── Views ──────────────────────────────
+function showView(name) {
+    document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById(name + 'View').classList.add('active');
+    document.querySelectorAll('.tab-btn')[name === 'map' ? 0 : 1].classList.add('active');
+    if (name === 'map') setTimeout(() => map?.invalidateSize(), 100);
+    if (name === 'admin') loadAdminData();
+}
+
+// ─── Map Init ───────────────────────────
+function initMap() {
+    map = L.map('map').setView([35.6892, 51.3890], 12);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© OpenStreetMap', maxZoom: 19,
+    }).addTo(map);
+}
+
+// ─── API Helper ─────────────────────────
+async function api(endpoint, options = {}) {
+    const headers = { 'Content-Type': 'application/json' };
+    if (token) headers['Authorization'] = `Bearer ${token}`;
+    const res = await fetch(API_BASE + endpoint, { ...options, headers });
+    if (res.status === 401) { logout(); throw new Error('Unauthorized'); }
+    if (!res.ok) { const err = await res.json().catch(() => ({})); throw new Error(err.detail || 'Request failed'); }
+    return res.json();
+}
+
+// ─── Auth ───────────────────────────────
+async function login() {
+    const username = document.getElementById('loginUsername').value;
+    const password = document.getElementById('loginPassword').value;
+    const errorEl = document.getElementById('loginError');
+    try {
+        const data = await api('/auth/login', { method: 'POST', body: JSON.stringify({ username, password }) });
+        token = data.access_token;
+        localStorage.setItem('gps_token', token);
+        document.getElementById('loginOverlay').style.display = 'none';
+        document.getElementById('currentUser').textContent = username;
+        loadDevices();
+    } catch (e) {
+        errorEl.textContent = 'نام کاربری یا رمز عبور اشتباه است';
+        errorEl.style.display = 'block';
+    }
+}
+function logout() {
+    token = null;
+    localStorage.removeItem('gps_token');
+    document.getElementById('loginOverlay').style.display = 'flex';
+}
+
+// ─── Devices ────────────────────────────
+async function loadDevices() {
+    try {
+        const data = await api('/devices/');
+        renderDeviceList(data.devices);
+    } catch (e) { console.error(e); }
+}
+function renderDeviceList(devices) {
+    const c = document.getElementById('deviceList');
+    if (!devices.length) { c.innerHTML = '<p style="color:var(--text-dim); text-align:center; padding:2rem;">هیچ دستگاهی ثبت نشده</p>'; return; }
+    c.innerHTML = devices.map(d => `
+        <div class="device-card" data-uid="${d.device_uid}" onclick="selectDevice('${d.device_uid}')">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+                <div class="device-name">${d.name}</div>
+                <span class="${d.is_online ? 'online-badge' : 'offline-badge'}">${d.is_online ? 'آنلاین' : 'آفلاین'}</span>
+            </div>
+            <div class="device-meta"><span>${d.device_uid}</span><span>${d.battery_level ?? '?'}%</span></div>
+        </div>
+    `).join('');
+}
+async function selectDevice(uid) {
+    document.querySelectorAll('.device-card').forEach(c => c.classList.remove('active'));
+    document.querySelector(`[data-uid="${uid}"]`)?.classList.add('active');
+    selectedDeviceId = uid;
+    document.getElementById('statsPanel').style.display = 'block';
+    await loadLatestLocation(uid);
+}
+async function loadLatestLocation(uid) {
+    try {
+        const d = await api(`/devices/${uid}/location/latest`);
+        if (d.latitude) {
+            const pos = [d.latitude, d.longitude];
+            map.setView(pos, 15);
+            if (marker) map.removeLayer(marker);
+            marker = L.marker(pos).addTo(map).bindPopup(`<b>${d.device_name}</b><br>سرعت: ${d.speed ?? 0} km/h<br>باتری: ${d.battery ?? '?'}%`).openPopup();
+            document.getElementById('statSpeed').textContent = (d.speed ?? 0).toFixed(1);
+            document.getElementById('statBattery').textContent = (d.battery ?? 0) + '%';
+            document.getElementById('statAccuracy').textContent = (d.accuracy ?? 0).toFixed(0);
+        }
+    } catch (e) { console.error(e); }
+}
+
+// ─── Admin ──────────────────────────────
+async function loadAdminData() {
+    try {
+        const [stats, users, devices] = await Promise.all([
+            api('/admin/stats'),
+            api('/admin/users'),
+            api('/admin/devices'),
+        ]);
+        document.getElementById('aStatUsers').textContent = stats.users;
+        document.getElementById('aStatDevices').textContent = stats.devices;
+        document.getElementById('aStatOnline').textContent = stats.online_devices;
+        document.getElementById('aStatLocations').textContent = stats.total_locations.toLocaleString();
+        renderUsersTable(users);
+        renderDevicesTable(devices);
+    } catch (e) { console.error(e); }
+}
+function renderUsersTable(users) {
+    document.getElementById('usersTable').innerHTML = users.map(u => `
+        <tr>
+            <td><strong>${u.username}</strong></td>
+            <td>${u.email}</td>
+            <td>${u.full_name || '-'}</td>
+            <td>${u.role}</td>
+            <td><span class="${u.is_active ? 'online-badge' : 'offline-badge'}">${u.is_active ? 'فعال' : 'غیرفعال'}</span></td>
+            <td>
+                <button class="btn btn-sm btn-outline" onclick="toggleUser('${u.id}')">${u.is_active ? 'غیرفعال' : 'فعال'}</button>
+                <button class="btn btn-sm btn-danger" onclick="deleteUser('${u.id}', '${u.username}')">حذف</button>
+            </td>
+        </tr>
+    `).join('');
+}
+function renderDevicesTable(devices) {
+    document.getElementById('devicesTable').innerHTML = devices.map(d => `
+        <tr>
+            <td><strong>${d.name}</strong></td>
+            <td><code>${d.device_uid}</code></td>
+            <td><code style="font-size:0.75rem;">${d.mqtt_topic}</code></td>
+            <td><span class="${d.is_online ? 'online-badge' : 'offline-badge'}">${d.is_online ? 'آنلاین' : 'آفلاین'}</span></td>
+            <td>${d.battery_level ?? '?'}%</td>
+            <td>${d.last_seen ? new Date(d.last_seen).toLocaleString('fa-IR') : '-'}</td>
+            <td><button class="btn btn-sm btn-danger" onclick="deleteDevice('${d.id}', '${d.name}')">حذف</button></td>
+        </tr>
+    `).join('');
+}
+
+// ─── User Actions ───────────────────────
+function showAddUserModal() { document.getElementById('addUserModal').classList.add('active'); }
+function closeModal(id) { document.getElementById(id).classList.remove('active'); }
+async function addUser() {
+    const body = {
+        username: document.getElementById('newUsername').value.trim(),
+        email: document.getElementById('newEmail').value.trim(),
+        password: document.getElementById('newPassword').value.trim(),
+        full_name: document.getElementById('newFullName').value.trim(),
+        phone: document.getElementById('newPhone').value.trim(),
+    };
+    if (!body.username || !body.email || !body.password) { showToast('نام کاربری، ایمیل و رمز الزامی است', true); return; }
+    try {
+        await api('/admin/users', { method: 'POST', body: JSON.stringify(body) });
+        showToast('کاربر اضافه شد');
+        closeModal('addUserModal');
+        loadAdminData();
+    } catch (e) { showToast('خطا: ' + e.message, true); }
+}
+async function toggleUser(id) {
+    try { await api(`/admin/users/${id}/toggle`, { method: 'PUT' }); loadAdminData(); } catch (e) { showToast('خطا', true); }
+}
+async function deleteUser(id, name) {
+    if (!confirm(`کاربر "${name}" حذف شود؟`)) return;
+    try { await api(`/admin/users/${id}`, { method: 'DELETE' }); showToast('حذف شد'); loadAdminData(); } catch (e) { showToast('خطا', true); }
+}
+async function deleteDevice(id, name) {
+    if (!confirm(`دستگاه "${name}" حذف شود؟`)) return;
+    try { await api(`/admin/devices/${id}`, { method: 'DELETE' }); showToast('حذف شد'); loadAdminData(); loadDevices(); } catch (e) { showToast('خطا', true); }
+}
+
+// ─── Auto Refresh ───────────────────────
+setInterval(() => { if (selectedDeviceId) loadLatestLocation(selectedDeviceId); }, 10000);
+
+// ─── Init ───────────────────────────────
+initMap();
+if (token) {
+    document.getElementById('loginOverlay').style.display = 'none';
+    loadDevices();
+}
+</script>
+</body>
+</html>

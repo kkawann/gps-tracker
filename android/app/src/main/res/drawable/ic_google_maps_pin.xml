@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="48dp"
+    android:height="64dp"
+    android:viewportWidth="72"
+    android:viewportHeight="96">
+
+    <!-- Drop shadow (soft ellipse under the tip) -->
+    <path
+        android:fillColor="#33000000"
+        android:pathData="M36,92 C28,92 20,89 20,86 C20,83 28,80 36,80 C44,80 52,83 52,86 C52,89 44,92 36,92Z" />
+
+    <!-- Pin body — Google Maps Red (#EA4335), head top at y=8, tip at y=88 -->
+    <path
+        android:fillColor="#EA4335"
+        android:pathData="M36,88 C22,78 8,64 8,46 C8,24 20,8 36,8 C52,8 64,24 64,46 C64,64 50,78 36,88Z" />
+
+    <!-- Bottom-half shading for depth -->
+    <path
+        android:fillColor="#C5221F"
+        android:pathData="M36,88 C22,78 8,64 8,46 C8,38 11,30 15,24 L36,88Z" />
+
+    <!-- White ring — fully inside the head (center y=25, top edge y=12 > 8) -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M36,25 m-13,0 a13,13 0 1,1 26,0 a13,13 0 1,1 -26,0" />
+
+    <!-- Red center dot -->
+    <path
+        android:fillColor="#EA4335"
+        android:pathData="M36,25 m-6,0 a6,6 0 1,1 12,0 a6,6 0 1,1 -12,0" />
+
+    <!-- Highlight glare (top-left shine) -->
+    <path
+        android:fillColor="#2EFFFFFF"
+        android:pathData="M23,18 C25,13 30,10 35,10 C31,13 27,16 23,18Z" />
+</vector>

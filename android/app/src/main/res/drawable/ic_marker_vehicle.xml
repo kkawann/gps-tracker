@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="40dp"
+    android:height="40dp"
+    android:viewportWidth="160"
+    android:viewportHeight="160">
+
+    <!-- ═══ Shadow — soft drop shadow under the circle ═══ -->
+    <path
+        android:fillColor="#22000000"
+        android:pathData="M80,148 C58,148 40,142 40,134 C40,126 58,120 80,120 C102,120 120,126 120,134 C120,142 102,148 80,148Z" />
+
+    <!-- ═══ Outer ring — dark teal border ═══ -->
+    <path
+        android:fillColor="#0D5F4F"
+        android:pathData="M80,112 C52.4,112 30,89.6 30,62 C30,34.4 52.4,12 80,12 C107.6,12 130,34.4 130,62 C130,89.6 107.6,112 80,112Z" />
+
+    <!-- ═══ Gradient layers — overlapping semi-transparent circles ═══
+         top-left = brand teal, bottom-right = deeper green
+         centered overlap creates a natural gradient effect -->
+    <path
+        android:fillColor="#6662C9A5"
+        android:pathData="M80,108 C54.6,108 34,87.4 34,62 C34,36.6 54.6,16 80,16 C105.4,16 126,36.6 126,62 C126,87.4 105.4,108 80,108Z" />
+    <path
+        android:fillColor="#66059669"
+        android:pathData="M86,112 C58.4,112 36,89.6 36,62 C36,34.4 58.4,12 86,12 C113.6,12 136,34.4 136,62 C136,89.6 113.6,112 86,112Z" />
+
+    <!-- ═══ White ring — center ═══ -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M80,68 a18,18 0 1,1 0.01,0Z" />
+    <path
+        android:fillColor="#62C9A5"
+        android:pathData="M80,64 a14,14 0 1,1 0.01,0Z" />
+
+    <!-- ═══ Car silhouette — white, centered ═══
+         viewBox 160×160, car ~30dp wide, centered at (80,62) -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M66,54 L72,46 C74,43 77,42 80,42 C83,42 86,43 88,46 L94,54 L98,54 C100,54 102,56 102,58 L102,60 L104,60 C106,60 108,62 108,64 L108,70 C108,72 106,74 104,74 L102,74 L102,78 C102,80 100,82 98,82 L94,82 C92,82 90,80 90,78 L90,76 L70,76 L70,78 C70,80 68,82 66,82 L62,82 C60,82 58,80 58,78 L58,74 L56,74 C54,74 52,72 52,70 L52,64 C52,62 54,60 56,60 L58,60 L58,58 C58,56 60,54 62,54 Z" />
+
+    <!-- ═══ Windshield highlight — subtle detail ═══ -->
+    <path
+        android:fillColor="#22FFFFFF"
+        android:pathData="M74,50 L86,50 L84,56 L76,56 Z" />
+</vector>

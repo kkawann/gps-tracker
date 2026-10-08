@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_deep">
+
+    <org.osmdroid.views.MapView
+        android:id="@+id/mapGeofence"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <!-- Hint pill (top) -->
+    <TextView
+        android:id="@+id/tvGeofenceHint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|center_horizontal"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/bg_signal_pill"
+        android:text="برای افزودن حصار، روی نقشه ضربه بزنید"
+        android:textColor="@color/text_secondary"
+        android:textSize="12sp"
+        android:fontFamily="@font/vazirmatn_medium"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:paddingTop="9dp"
+        android:paddingBottom="9dp" />
+
+    <!-- FAB -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabAddGeofence"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_marginEnd="18dp"
+        android:layout_marginBottom="24dp"
+        android:src="@android:drawable/ic_input_add"
+        android:contentDescription="افزودن حصار"
+        style="@style/FabStyle" />
+
+    <!-- Geofence create dialog — glass bottom sheet -->
+    <LinearLayout
+        android:id="@+id/dialogGeofence"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:orientation="vertical"
+        android:background="@drawable/bg_glass_float"
+        android:padding="22dp"
+        android:layout_margin="12dp"
+        android:elevation="10dp"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="حصار جدید"
+            android:textColor="@color/aurora_cyan"
+            android:textSize="16sp"
+            android:fontFamily="@font/vazirmatn_bold"
+            android:layout_marginBottom="14dp" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="نام حصار"
+            android:layout_marginBottom="12dp"
+            style="@style/InputDark">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etGeofenceName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/text_primary"
+                android:textColorHint="@color/text_hint"
+                android:fontFamily="@font/vazirmatn_medium"
+                android:inputType="text" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="شعاع (متر)"
+            android:layout_marginBottom="14dp"
+            style="@style/InputDark">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etGeofenceRadius"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/text_primary"
+                android:textColorHint="@color/text_hint"
+                android:fontFamily="@font/vazirmatn_medium"
+                android:inputType="number"
+                android:text="500" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="end">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnCancelGeofence"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="لغو"
+                android:textColor="@color/text_secondary"
+                android:fontFamily="@font/vazirmatn_medium"
+                style="@style/BtnText" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnSaveGeofence"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ذخیره"
+                style="@style/BtnPrimary"
+                android:layout_marginStart="8dp" />
+        </LinearLayout>
+    </LinearLayout>
+</FrameLayout>

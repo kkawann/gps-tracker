@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="72dp"
+    android:layout_height="96dp"
+    android:clipChildren="false"
+    android:clipToPadding="false">
+
+    <!-- Glow shadow (breathing effect) -->
+    <ImageView
+        android:id="@+id/markerGlow"
+        android:layout_width="48dp"
+        android:layout_height="16dp"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginBottom="2dp"
+        android:src="@drawable/marker_glow_shadow"
+        android:alpha="0.5"
+        android:scaleType="fitCenter" />
+
+    <!-- Google Maps–style red pin -->
+    <ImageView
+        android:id="@+id/markerPin"
+        android:layout_width="72dp"
+        android:layout_height="96dp"
+        android:layout_gravity="top|center_horizontal"
+        android:src="@drawable/ic_google_maps_pin"
+        android:scaleType="fitCenter" />
+</FrameLayout>

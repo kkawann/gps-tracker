@@ -1,0 +1,247 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- ══════════════════════════════════════════════════════════
+         AURORA THEME — Material 3 (Dark default)
+         ══════════════════════════════════════════════════════════ -->
+    <style name="Theme.GPS" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/md_theme_primary</item>
+        <item name="colorOnPrimary">@color/md_theme_onPrimary</item>
+        <item name="colorPrimaryVariant">@color/md_theme_primaryContainer</item>
+        <item name="colorSecondary">@color/md_theme_secondary</item>
+        <item name="colorOnSecondary">@color/md_theme_onSecondary</item>
+        <item name="colorSecondaryVariant">@color/md_theme_secondaryContainer</item>
+        <item name="colorError">@color/md_theme_error</item>
+        <item name="colorOnError">@color/md_theme_onError</item>
+        <item name="android:colorBackground">@color/md_theme_background</item>
+        <item name="colorOnBackground">@color/md_theme_onBackground</item>
+        <item name="colorSurface">@color/md_theme_surface</item>
+        <item name="colorOnSurface">@color/md_theme_onSurface</item>
+        <item name="android:statusBarColor">@color/md_theme_statusBar</item>
+        <item name="android:navigationBarColor">@color/md_theme_navigationBar</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:windowLightNavigationBar">false</item>
+
+        <!-- Typography -->
+        <item name="android:fontFamily">@font/vazirmatn_regular</item>
+        <item name="textAppearanceHeadline1">@style/TextAppearance.GPS.HeadlineLarge</item>
+        <item name="textAppearanceHeadline2">@style/TextAppearance.GPS.HeadlineMedium</item>
+        <item name="textAppearanceHeadline3">@style/TextAppearance.GPS.HeadlineSmall</item>
+        <item name="textAppearanceHeadline4">@style/TextAppearance.GPS.TitleLarge</item>
+        <item name="textAppearanceHeadline5">@style/TextAppearance.GPS.TitleMedium</item>
+        <item name="textAppearanceHeadline6">@style/TextAppearance.GPS.TitleSmall</item>
+        <item name="textAppearanceSubtitle1">@style/TextAppearance.GPS.BodyLarge</item>
+        <item name="textAppearanceSubtitle2">@style/TextAppearance.GPS.BodyMedium</item>
+        <item name="textAppearanceBody1">@style/TextAppearance.GPS.BodyMedium</item>
+        <item name="textAppearanceBody2">@style/TextAppearance.GPS.BodySmall</item>
+        <item name="textAppearanceCaption">@style/TextAppearance.GPS.BodySmall</item>
+        <item name="textAppearanceButton">@style/TextAppearance.GPS.LabelLarge</item>
+        <item name="textAppearanceOverline">@style/TextAppearance.GPS.LabelSmall</item>
+
+        <!-- Shape -->
+        <item name="shapeAppearanceSmallComponent">@style/ShapeAppearance.GPS.SmallComponent</item>
+        <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.GPS.MediumComponent</item>
+        <item name="shapeAppearanceLargeComponent">@style/ShapeAppearance.GPS.LargeComponent</item>
+
+        <!-- Bottom sheet & dialog scrim -->
+        <item name="bottomSheetDialogTheme">@style/AuroraBottomSheet</item>
+        <item name="materialAlertDialogTheme">@style/AuroraAlertDialog</item>
+    </style>
+
+    <!-- ═══ Typography Scale ═══════════════════════════════════ -->
+    <style name="TextAppearance.GPS.HeadlineLarge" parent="TextAppearance.MaterialComponents.Headline1">
+        <item name="fontFamily">@font/vazirmatn_bold</item>
+        <item name="android:textSize">34sp</item>
+    </style>
+    <style name="TextAppearance.GPS.HeadlineMedium" parent="TextAppearance.MaterialComponents.Headline2">
+        <item name="fontFamily">@font/vazirmatn_bold</item>
+        <item name="android:textSize">28sp</item>
+    </style>
+    <style name="TextAppearance.GPS.HeadlineSmall" parent="TextAppearance.MaterialComponents.Headline3">
+        <item name="fontFamily">@font/vazirmatn_semi_bold</item>
+        <item name="android:textSize">24sp</item>
+    </style>
+    <style name="TextAppearance.GPS.TitleLarge" parent="TextAppearance.MaterialComponents.Headline4">
+        <item name="fontFamily">@font/vazirmatn_semi_bold</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+    <style name="TextAppearance.GPS.TitleMedium" parent="TextAppearance.MaterialComponents.Headline5">
+        <item name="fontFamily">@font/vazirmatn_semi_bold</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+    <style name="TextAppearance.GPS.TitleSmall" parent="TextAppearance.MaterialComponents.Headline6">
+        <item name="fontFamily">@font/vazirmatn_semi_bold</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+    <style name="TextAppearance.GPS.BodyLarge" parent="TextAppearance.MaterialComponents.Subtitle1">
+        <item name="fontFamily">@font/vazirmatn_medium</item>
+        <item name="android:textSize">15sp</item>
+    </style>
+    <style name="TextAppearance.GPS.BodyMedium" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="fontFamily">@font/vazirmatn_medium</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+    <style name="TextAppearance.GPS.BodySmall" parent="TextAppearance.MaterialComponents.Body2">
+        <item name="fontFamily">@font/vazirmatn_medium</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+    <style name="TextAppearance.GPS.LabelLarge" parent="TextAppearance.MaterialComponents.Button">
+        <item name="fontFamily">@font/vazirmatn_semi_bold</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+    <style name="TextAppearance.GPS.LabelSmall" parent="TextAppearance.MaterialComponents.Caption">
+        <item name="fontFamily">@font/vazirmatn_medium</item>
+    </style>
+
+    <!-- ═══ Shape System — generously rounded ══════════════════ -->
+    <style name="ShapeAppearance.GPS.SmallComponent" parent="ShapeAppearance.Material3.SmallComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">12dp</item>
+    </style>
+    <style name="ShapeAppearance.GPS.MediumComponent" parent="ShapeAppearance.Material3.MediumComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">20dp</item>
+    </style>
+    <style name="ShapeAppearance.GPS.LargeComponent" parent="ShapeAppearance.Material3.LargeComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">28dp</item>
+    </style>
+
+    <!-- ═══ Component Styles ═══════════════════════════════════ -->
+
+    <!-- Primary gradient pill button -->
+    <style name="BtnPrimary" parent="Widget.MaterialComponents.Button">
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:fontFamily">@font/vazirmatn_semi_bold</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="cornerRadius">14dp</item>
+        <item name="android:paddingStart">24dp</item>
+        <item name="android:paddingEnd">24dp</item>
+        <item name="backgroundTint">@color/md_theme_primary</item>
+        <item name="rippleColor">#33FFFFFF</item>
+    </style>
+
+    <style name="BtnOutlined" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="android:textColor">@color/text_primary</item>
+        <item name="strokeColor">@color/card_border</item>
+        <item name="strokeWidth">1dp</item>
+        <item name="android:fontFamily">@font/vazirmatn_medium</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="cornerRadius">14dp</item>
+    </style>
+
+    <style name="BtnText" parent="Widget.MaterialComponents.Button.TextButton">
+        <item name="android:textColor">@color/aurora_cyan</item>
+        <item name="android:fontFamily">@font/vazirmatn_medium</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+
+    <style name="InputDark" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="boxStrokeColor">@color/input_stroke_colors</item>
+        <item name="hintTextColor">@color/aurora_cyan</item>
+        <item name="android:textColorHint">@color/text_hint</item>
+        <item name="boxBackgroundColor">@color/md_theme_surfaceContainerLow</item>
+        <item name="boxStrokeWidth">1dp</item>
+        <item name="boxStrokeWidthFocused">2dp</item>
+        <item name="boxCornerRadiusTopStart">14dp</item>
+        <item name="boxCornerRadiusTopEnd">14dp</item>
+        <item name="boxCornerRadiusBottomStart">14dp</item>
+        <item name="boxCornerRadiusBottomEnd">14dp</item>
+    </style>
+
+    <style name="GlassCard" parent="Widget.MaterialComponents.CardView">
+        <item name="cardBackgroundColor">@color/glass_panel_bg</item>
+        <item name="cardCornerRadius">22dp</item>
+        <item name="cardElevation">0dp</item>
+        <item name="android:padding">18dp</item>
+        <item name="strokeColor">@color/glass_panel_border</item>
+        <item name="strokeWidth">1dp</item>
+    </style>
+
+    <style name="GlassCardElevated" parent="Widget.MaterialComponents.CardView">
+        <item name="cardBackgroundColor">@color/glass_panel_bg</item>
+        <item name="cardCornerRadius">26dp</item>
+        <item name="cardElevation">6dp</item>
+        <item name="android:padding">18dp</item>
+        <item name="strokeColor">@color/glass_panel_border</item>
+        <item name="strokeWidth">1dp</item>
+    </style>
+
+    <style name="FabStyle" parent="Widget.MaterialComponents.FloatingActionButton">
+        <item name="backgroundTint">@color/md_theme_primary</item>
+        <item name="tint">#FFFFFF</item>
+        <item name="shapeAppearanceOverlay">@style/FabShape</item>
+    </style>
+    <style name="FabShape">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">18dp</item>
+    </style>
+
+    <style name="ExtendedFabStyle" parent="Widget.MaterialComponents.ExtendedFloatingActionButton">
+        <item name="backgroundTint">@color/md_theme_primary</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="iconTint">#FFFFFF</item>
+    </style>
+
+    <style name="NavBarStyle" parent="Widget.MaterialComponents.BottomNavigationView">
+        <item name="backgroundTint">@color/nav_bar</item>
+        <item name="itemIconTint">@color/nav_item_color_m3</item>
+        <item name="itemTextColor">@color/nav_item_color_m3</item>
+        <item name="elevation">0dp</item>
+        <item name="labelVisibilityMode">labeled</item>
+    </style>
+
+    <style name="DayChip" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="android:textColor">@color/text_secondary</item>
+        <item name="strokeColor">@color/card_border</item>
+        <item name="strokeWidth">1dp</item>
+        <item name="cornerRadius">16dp</item>
+        <item name="android:fontFamily">@font/vazirmatn_medium</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+
+    <!-- ═══ Dialogs & Bottom Sheets (Aurora dark) ═════════════ -->
+    <style name="AuroraAlertDialog" parent="ThemeOverlay.MaterialComponents.MaterialAlertDialog">
+        <item name="colorSurface">@color/md_theme_surfaceContainerHigh</item>
+        <item name="alertDialogStyle">@style/AuroraAlertDialogBase</item>
+        <item name="materialAlertDialogTitleTextStyle">@style/AuroraDialogTitle</item>
+        <item name="materialAlertDialogBodyTextStyle">@style/AuroraDialogBody</item>
+        <item name="buttonBarPositiveButtonStyle">@style/AuroraDialogButton</item>
+        <item name="buttonBarNegativeButtonStyle">@style/AuroraDialogButtonMuted</item>
+    </style>
+    <style name="AuroraAlertDialogBase" parent="MaterialAlertDialog.MaterialComponents">
+        <item name="shapeAppearance">@style/AuroraDialogShape</item>
+    </style>
+    <style name="AuroraDialogShape" parent="ShapeAppearance.MaterialComponents.MediumComponent">
+        <item name="cornerSize">24dp</item>
+    </style>
+    <style name="AuroraDialogTitle" parent="MaterialAlertDialog.MaterialComponents.Title.Text">
+        <item name="android:textColor">@color/text_primary</item>
+        <item name="android:fontFamily">@font/vazirmatn_semi_bold</item>
+        <item name="android:textSize">17sp</item>
+    </style>
+    <style name="AuroraDialogBody" parent="MaterialAlertDialog.MaterialComponents.Body.Text">
+        <item name="android:textColor">@color/text_secondary</item>
+        <item name="android:fontFamily">@font/vazirmatn_medium</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+    <style name="AuroraDialogButton" parent="Widget.MaterialComponents.Button.TextButton.Dialog">
+        <item name="android:textColor">@color/aurora_cyan</item>
+        <item name="android:fontFamily">@font/vazirmatn_semi_bold</item>
+    </style>
+    <style name="AuroraDialogButtonMuted" parent="Widget.MaterialComponents.Button.TextButton.Dialog">
+        <item name="android:textColor">@color/text_secondary</item>
+        <item name="android:fontFamily">@font/vazirmatn_medium</item>
+    </style>
+
+    <style name="AuroraBottomSheet" parent="ThemeOverlay.MaterialComponents.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/AuroraBottomSheetShape</item>
+    </style>
+    <style name="AuroraBottomSheetShape" parent="Widget.MaterialComponents.BottomSheet.Modal">
+        <item name="backgroundTint">@color/md_theme_surfaceContainerHigh</item>
+        <item name="shapeAppearanceOverlay">@style/AuroraBottomSheetRounded</item>
+    </style>
+    <style name="AuroraBottomSheetRounded" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeTopLeft">28dp</item>
+        <item name="cornerSizeTopRight">28dp</item>
+    </style>
+</resources>

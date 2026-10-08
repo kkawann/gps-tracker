@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- ON state: green neon glow -->
+    <item android:state_pressed="true">
+        <shape android:shape="oval">
+            <solid android:color="#4439FF88" />
+            <stroke android:width="2dp" android:color="#B039FF88" />
+            <size android:width="64dp" android:height="64dp" />
+        </shape>
+    </item>
+    <!-- Default OFF state: red neon glow -->
+    <item>
+        <shape android:shape="oval">
+            <solid android:color="#33FF3B5C" />
+            <stroke android:width="2dp" android:color="#A6FF3B5C" />
+            <size android:width="64dp" android:height="64dp" />
+        </shape>
+    </item>
+</selector>

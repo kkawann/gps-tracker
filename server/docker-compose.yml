@@ -1,0 +1,64 @@
+services:
+  mosquitto:
+    image: eclipse-mosquitto:2
+    restart: unless-stopped
+    ports:
+      - "${MQTT_BIND_ADDRESS:-127.0.0.1}:1883:1883"
+      - "${MQTT_BIND_ADDRESS:-127.0.0.1}:9001:9001"
+    volumes:
+      - ./mosquitto/config:/mosquitto/config
+      - mqtt_data:/mosquitto/data
+      - mqtt_log:/mosquitto/log
+  postgres:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: gps_tracker
+      POSTGRES_USER: gps_admin
+      POSTGRES_PASSWORD: ${DB_PASSWORD:?Run scripts/init_config.py first}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U gps_admin -d gps_tracker"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+  redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    volumes:
+      - redis_data:/data
+  backend:
+    build: ./backend
+    restart: unless-stopped
+    environment:
+      DATABASE_URL: postgresql+asyncpg://gps_admin:${DB_PASSWORD:?Run scripts/init_config.py first}@postgres:5432/gps_tracker
+      MQTT_BROKER: mosquitto
+      MQTT_PORT: 1883
+      MQTT_USERNAME: ${MQTT_USERNAME:-}
+      MQTT_PASSWORD: ${MQTT_PASSWORD:-}
+      REDIS_URL: redis://redis:6379
+      API_KEY: ${API_KEY:?Run scripts/init_config.py first}
+      JWT_SECRET: ${JWT_SECRET:?Run scripts/init_config.py first}
+    depends_on:
+      postgres:
+        condition: service_healthy
+      mosquitto:
+        condition: service_started
+      redis:
+        condition: service_started
+  nginx:
+    image: nginx:alpine
+    restart: unless-stopped
+    ports:
+      - "${HTTP_BIND_ADDRESS:-127.0.0.1}:8081:8081"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./dashboard:/usr/share/nginx/html:ro
+    depends_on:
+      - backend
+volumes:
+  postgres_data:
+  redis_data:
+  mqtt_data:
+  mqtt_log:

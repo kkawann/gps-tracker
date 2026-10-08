@@ -1,0 +1,97 @@
+def gpsConfig = new Properties()
+def gpsConfigFile = rootProject.file('gps.properties')
+if (gpsConfigFile.exists()) {
+    gpsConfigFile.withInputStream { gpsConfig.load(it) }
+}
+def gpsValue = { name, fallback -> groovy.json.JsonOutput.toJson(gpsConfig.getProperty(name, fallback)) }
+
+apply plugin: "com.android.application"
+apply plugin: "org.jetbrains.kotlin.android"
+apply plugin: "kotlin-kapt"
+
+android {
+    compileSdk rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
+    ndkVersion rootProject.ext.ndkVersion
+
+    namespace "com.gpsv1_final"
+    buildFeatures { buildConfig true }
+    defaultConfig {
+        applicationId "com.gpsv1_final"
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode 2
+        versionName "2.0-Aurora"
+        buildConfigField "String", "DEFAULT_SERVER_URL", gpsValue('server.url', 'http://10.0.2.2:8081')
+        buildConfigField "String", "DEFAULT_MQTT_BROKER", gpsValue('mqtt.broker', 'tcp://10.0.2.2:1883')
+        buildConfigField "String", "DEFAULT_MQTT_USERNAME", gpsValue('mqtt.username', '')
+        buildConfigField "String", "DEFAULT_MQTT_PASSWORD", gpsValue('mqtt.password', '')
+    }
+
+
+    buildTypes {
+        debug {
+        }
+        release {
+            minifyEnabled false
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+
+    kotlinOptions {
+        jvmTarget = '17'
+    }
+
+    packaging {
+        resources {
+            excludes += "META-INF/INDEX.LIST"
+            excludes += "META-INF/io.netty.versions.properties"
+        }
+    }
+
+    kapt {
+        javacOptions {
+            option("--add-opens=jdk.compiler/com.sun.tools.javac.main=ALL-UNNAMED")
+            option("--add-opens=jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED")
+            option("--add-opens=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED")
+        }
+    }
+}
+
+dependencies {
+    // MQTT - HiveMQ Client
+    implementation 'com.hivemq:hivemq-mqtt-client:1.3.3'
+
+    // OSMDroid (OpenStreetMap)
+    implementation 'org.osmdroid:osmdroid-android:6.1.18'
+
+    // Room (SQLite)
+    implementation 'androidx.room:room-runtime:2.6.1'
+    implementation 'androidx.room:room-ktx:2.6.1'
+    kapt 'androidx.room:room-compiler:2.6.1'
+
+    // Navigation
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.7.7'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.7.7'
+
+    // Material Design 3
+    implementation 'com.google.android.material:material:1.12.0'
+
+    // Lifecycle
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.0'
+    implementation 'androidx.lifecycle:lifecycle-livedata:2.8.0'
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.8.0'
+
+    // AndroidX Core
+    implementation 'androidx.core:core-ktx:1.12.0'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'androidx.preference:preference-ktx:1.2.1'
+
+    // Google Play Services - Location
+    implementation 'com.google.android.gms:play-services-location:21.3.0'
+}

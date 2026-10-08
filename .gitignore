@@ -1,0 +1,35 @@
+# Local credentials and machine settings
+.env
+.env.*
+!.env.example
+gps.properties
+local_config.h
+local.properties
+*.pem
+*.key
+*.keystore
+*.jks
+password.txt
+# Generated artifacts and runtime data
+.pio/
+.gradle/
+.idea/
+.vscode/
+.cxx/
+build/
+dist/
+node_modules/
+__pycache__/
+*.py[cod]
+.venv/
+*.log
+*.hprof
+*.apk
+*.aab
+*.db
+*.sqlite*
+*.zip
+server/mosquitto/data/
+server/mosquitto/log/
+.DS_Store
+Thumbs.db
